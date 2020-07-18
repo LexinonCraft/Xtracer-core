@@ -49,4 +49,10 @@ public class Plane implements Hittable {
 		this.inwardNormalVector = inwardNormalVector;
 	}
 	
+	public class Hittable implements Hittable {
+		
+		
+		
+	}
+	
 }
