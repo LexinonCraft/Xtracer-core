@@ -1,6 +1,6 @@
 package lex.xtracer.core;
 
-public class Plane implements Hittable {
+public class Plane {
 	
 	public Vec3 point;
 	public Vec3 inwardNormalVector;
@@ -10,14 +10,16 @@ public class Plane implements Hittable {
 		this.inwardNormalVector = inwardNormalVector;
 	}
 	
-	public class Hittable implements Hittable {
+	public class Hittable implements lex.xtracer.core.Hittable {
+		
+		public double a;
 		
 		@Override
 		public double intersectionTest(Ray ray) {
 			
 			try {
 				
-				double distance = (point.minus(ray.origin).dot(inwardNormalVector)) / ray.direction.dot(inwardNormalVector);
+				double distance = (a - ray.origin.dot(inwardNormalVector)) / ray.direction.dot(inwardNormalVector);
 				
 				if(distance <= 0) {
 					
@@ -48,6 +50,18 @@ public class Plane implements Hittable {
 		public Vec3 getInwardNormalVector(Vec3 point) {
 			
 			return inwardNormalVector;
+			
+		}
+		
+		public void update() {
+			
+			a = point.dot(inwardNormalVector);
+			
+		}
+		
+		public Hittable() {
+			
+			update();
 			
 		}
 		
